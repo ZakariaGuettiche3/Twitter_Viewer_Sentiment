@@ -1,0 +1,23 @@
+data_ingestion:
+  test_size: 0.2
+  valid_size: 0.1
+
+word2vec:
+  embedding_dim: 50
+  window: 3
+  min_count: 15
+  epochs: 20
+  max_len: 50
+
+#I will use GRU Model
+model:
+  hidden_dim: 64
+  hidden_dim_2: 32
+  dropout: 0.5
+
+training:
+  epochs: 25
+  batch_size: 64
+  learning_rate: 0.001
+  optimizer: "AdamW"
+  loss_function: "CrossEntropyLoss"

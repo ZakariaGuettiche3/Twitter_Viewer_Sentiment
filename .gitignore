@@ -1,0 +1,6 @@
+Data/raw/*
+/word2vec
+/best_bigru_model.pth
+/last_model.pth
+log/*
+/metrics

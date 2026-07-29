@@ -1,0 +1,109 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data/data_ingestion.py
+    deps:
+    - path: Data/clean_data.csv
+      hash: md5
+      md5: a4c24590914d6fb936f154a40dd553de
+      size: 21271907
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: 222fa715c02809138110d0fdaca3e749
+      size: 3732
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.2
+        data_ingestion.valid_size: 0.1
+    outs:
+    - path: Data/raw
+      hash: md5
+      md5: 4b62c5a3a1b5c8190eb78f57f1d75ea6.dir
+      size: 21092876
+      nfiles: 3
+  data_preprocessing:
+    cmd: python src/data/data_preprocessing.py
+    deps:
+    - path: data/raw/test.csv
+      hash: md5
+      md5: e0a8e6f465d8b4d31334ddcc7153d8e1
+      size: 4225037
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 7e47367283ad2e115996623633dab1e1
+      size: 15169511
+    - path: data/raw/valid.csv
+      hash: md5
+      md5: 140b888b46407cfe0ee944d30de2f0ae
+      size: 1698328
+    - path: src/data/data_preprocessing.py
+      hash: md5
+      md5: fa2014b56861937d189874987c5a4685
+      size: 5485
+    outs:
+    - path: Data/preprocessed
+      hash: md5
+      md5: 9504c8ca7b31a78a73c8291029a70d4e.dir
+      size: 21037073
+      nfiles: 3
+  model_build:
+    cmd: python src/model/model_build.py
+    deps:
+    - path: Data/preprocessed
+      hash: md5
+      md5: 9504c8ca7b31a78a73c8291029a70d4e.dir
+      size: 21037073
+      nfiles: 3
+    - path: src/model/model_build.py
+      hash: md5
+      md5: a8fae89f41b4ceba6622226c3372b6f0
+      size: 20905
+    params:
+      params.yaml:
+        model.dropout: 0.5
+        model.hidden_dim: 64
+        model.hidden_dim_2: 32
+        training.batch_size: 64
+        training.epochs: 25
+        training.learning_rate: 0.001
+    outs:
+    - path: best_bigru_model.pth
+      hash: md5
+      md5: 85199fc8be4ba8bb5cda046dac50c73c
+      size: 1907623
+    - path: word2vec
+      hash: md5
+      md5: 240558bc576c55caca83c91dea031f87.dir
+      size: 1995987
+      nfiles: 2
+  model_evaluation:
+    cmd: python src/model/model_evaluation.py
+    deps:
+    - path: Data/preprocessed/test_preprocessed.csv
+      hash: md5
+      md5: 14dc60e18299a41d9eac961f4c8e61ea
+      size: 4214224
+    - path: best_bigru_model.pth
+      hash: md5
+      md5: 85199fc8be4ba8bb5cda046dac50c73c
+      size: 1907623
+    - path: models
+      hash: md5
+      md5: 9264940c99a89f4bb393dc6049e511da.dir
+      size: 119
+      nfiles: 1
+    - path: src/model/model_evaluation.py
+      hash: md5
+      md5: 2fe5b466dcd6fa97f5b0b1c8e75d6697
+      size: 14504
+  model_registration:
+    cmd: python src/model/model_register.py
+    deps:
+    - path: models/model_info.json
+      hash: md5
+      md5: 1dc7e6dd566839fcb53337d6e3fbd520
+      size: 119
+    - path: src/model/model_register.py
+      hash: md5
+      md5: 60a8e20f7afcb2a1d9e0899961ed481a
+      size: 2161

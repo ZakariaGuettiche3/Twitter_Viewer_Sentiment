@@ -1,0 +1,52 @@
+stages:
+  data_ingestion:
+    cmd: python src/data/data_ingestion.py
+    params:
+      - data_ingestion.test_size
+      - data_ingestion.valid_size
+    deps:
+      - src/data/data_ingestion.py
+      - Data/clean_data.csv
+    outs:
+      - Data/raw
+  data_preprocessing:
+    cmd: python src/data/data_preprocessing.py
+    deps:
+      - data/raw/train.csv
+      - data/raw/test.csv
+      - data/raw/valid.csv
+      - src/data/data_preprocessing.py
+    outs:
+      - Data/preprocessed
+  model_build:
+    cmd: python src/model/model_build.py
+
+    deps:
+      # - src/model/model_build.py
+      - Data/preprocessed
+
+    params:
+      - model.hidden_dim
+      - model.hidden_dim_2
+      - model.dropout
+
+      - training.epochs
+      - training.batch_size
+      - training.learning_rate
+
+    outs:
+      - word2vec
+      - best_bigru_model.pth
+  model_evaluation:
+    cmd: python src/model/model_evaluation.py
+
+    deps:
+      - src/model/model_evaluation.py
+      - best_bigru_model.pth
+      - Data/preprocessed/test_preprocessed.csv
+      - models
+  model_registration:
+    cmd: python src/model/model_register.py
+    deps:
+      - models/model_info.json
+      - src/model/model_register.py

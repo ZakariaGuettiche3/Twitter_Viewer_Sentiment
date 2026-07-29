@@ -1,0 +1,21 @@
+[project]
+name = "twitter-viewer-sentiment"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "awscli==1.45.57",
+    "boto3==1.43.36",
+    "dvc>=3.67.1",
+    "gensim==4.4.0",
+    "matplotlib==3.10.0",
+    "mlflow==3.14.0",
+    "nltk>=3.10.0",
+    "numpy==2.0.2",
+    "pandas==2.3.3",
+    "scikit-learn==1.6.1",
+    "seaborn==0.13.2",
+    "torch==2.10.0",
+    "tqdm==4.67.3",
+]
