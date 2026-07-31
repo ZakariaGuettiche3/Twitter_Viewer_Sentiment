@@ -1,12 +1,4 @@
-# Set up
-
-pip install uv
-
-uv init my_project_name
-
-cd my_project_name
-
-uv venv# Twitter Viewer Sentiment
+# Twitter Viewer Sentiment
 
 An end-to-end sentiment analysis system built with a DVC-managed machine learning pipeline, MLflow experiment tracking and model registry, a Flask REST API for serving predictions, and a Chrome browser extension ("Comment Pulse") that surfaces the sentiment breakdown of a YouTube video's comments in real time.
 
@@ -14,6 +6,7 @@ Repository: https://github.com/ZakariaGuettiche3/Twitter_Viewer_Sentiment
 
 ---
 
+ù
 
 ## Table of Contents
 
@@ -436,20 +429,3 @@ Note: the extension's `manifest.json` grants host permissions only for `googleap
 - **Model serving**: Flask, Flask-CORS
 - **Client**: Chrome extension (Manifest V3), Chart.js
 - **Cloud infrastructure**: AWS (IAM, EC2, S3)
-
-
-.venv\Scripts\activate.bat
-
-uv add -r requirements.txt
-
-# DCV
-
-dvc init
-
-dvc repro
-
-dvc dag
-
-# AWS
-
-aws configure
