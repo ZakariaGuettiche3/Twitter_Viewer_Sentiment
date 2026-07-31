@@ -77,7 +77,7 @@ def calculate_weights(
 ) -> torch.Tensor:
 
     try:
-        logger.info("Calculating class weights...")
+        logger.info("Calculating class weights")
 
         classes = np.sort(df["category"].unique())
 
@@ -91,7 +91,7 @@ def calculate_weights(
         logger.debug("Detected classes: %s", classes)
         logger.debug("Class weights: %s", weights.tolist())
 
-        logger.info("Class weights calculated successfully.")
+        logger.info("Class weights calculated successfully")
 
         return weights
 
@@ -100,7 +100,7 @@ def calculate_weights(
         raise
 
     except Exception:
-        logger.exception("Failed to calculate class weights.")
+        logger.exception("Failed to calculate class weights")
         raise
     
 
@@ -115,7 +115,7 @@ def train_word2vec(
 ) -> tuple[np.ndarray, dict]:
     
     try:
-        logger.info("Training Word2Vec model...")
+        logger.info("Training Word2Vec model")
 
         train_tokens = [
             sentence.split()

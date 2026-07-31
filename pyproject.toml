@@ -8,6 +8,7 @@ dependencies = [
     "awscli==1.45.57",
     "boto3==1.43.36",
     "dvc>=3.67.1",
+    "flask>=3.1.3",
     "gensim==4.4.0",
     "matplotlib==3.10.0",
     "mlflow==3.14.0",
